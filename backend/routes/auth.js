@@ -2,7 +2,7 @@ const express = require("express");
 const z = require("zod");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-
+const fetchUser = require("../middlewares/fetchUser");
 require('dotenv').config();
 
 const router = express.Router();
@@ -87,6 +87,17 @@ router.post("/login", async(req,res)=> {
     res.json({msg: "some error occured"})
   }
   
+})
+
+
+router.get("/getuser", fetchUser, async(req,res)=>{
+  // return res.json({id:req.body.id});
+  try {
+    let user = await User.findById(req.body.id);
+    res.json(user)
+  } catch (e) {
+    res.status(500).json({msg:'error occured while fetching user data'})
+  }
 })
 
 module.exports = router;

@@ -1,15 +1,21 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_KEY = "asdf";
+require("dotenv").config();
+
+
 
 const fetchUser = (req,res,next) => {
 
-  const token = req.header('token');
-  if(!token) {
-    res.status(401).json({msg: "invalid token"});
+  const token = req.headers.token
+  console.log(token)
+  const decoded = jwt.verify(token, process.env.JWT_KEY, (err,decoded)=>{
+      if (err) return false
+      return decoded
+    });
+  if (!decoded) {
+    return res.json({msg: "invalid token"})
   }
-  const data = jwt.verify(token, JWT_KEY);
-  req.user = data.user;
+  req.body.id = decoded.id;
   next();
 }
 
