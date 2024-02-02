@@ -1,6 +1,7 @@
 const express = require("express");
 const connectToMongo = require("./db");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -10,6 +11,8 @@ connectToMongo();
 
 app.use(express.json());
 app.use(cors());
+// app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", require("./routes/auth"));
 

@@ -23,13 +23,11 @@ const loginSchema = z.object({
 
 router.post("/createuser", async (req,res)=>{
   // console.log(process.env.JWT_KEY)
-  const user = userSchema.safeParse(req.body.user);
+  const user = userSchema.safeParse(req.body);
   if (!user.success) {
     return res.status(400).json({msg: "wrong input"});
   }
-
   try {
-
     const findUser = await User.findOne({email:user.data.email});
     // console.log(findUser);
     if (findUser!=null) { 
@@ -59,26 +57,19 @@ router.post("/createuser", async (req,res)=>{
 
 
 router.post("/login", async(req,res)=> {
-  // const token = req.body.token;
-  // const decoded = jwt.verify(token, process.env.JWT_KEY, (err,decoded)=>{
-  //   if (err) return false
-  //   return decoded
-  // });
-  // console.log(decoded)
-  // if (!decoded) {
-  //   return res.json({msg: "invalid token"})
-  // }
-
+  // console.log(`email: ${email} and password: ${password}`);
+  
   const {email, password} = req.body;
   const userLogin = loginSchema.safeParse({email,password});
+  // console.log(userLogin)
   if (!userLogin.success) {
-    return res.status(400).json({msg: "wrong input"});
+    return res.json({msg: "Wrong input"});
   }
 
   try {
     const user = await User.findOne({email, password});
     if(user===null) {
-      return res.json({msg: "invalid email or password"});
+      return res.json({msg: "Invalid email or password"});
     }
     const token = jwt.sign({id: user._id}, process.env.JWT_KEY);
     res.json({token});
@@ -88,6 +79,7 @@ router.post("/login", async(req,res)=> {
   }
   
 })
+
 
 
 router.get("/getuser", fetchUser, async(req,res)=>{

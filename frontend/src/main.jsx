@@ -13,6 +13,7 @@ import ErrorPage from './ErrorPage.jsx';
 import Login from './routes/Login.jsx';
 import Navbar from './components/Navbar.jsx';
 import {AuthContextProvider} from './AuthContextProvider';
+import Signup from './routes/Signup.jsx';
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login/>
+  },
+  {
+    path: "/signup",
+    element: <Signup/>
   }
 ]);
 
