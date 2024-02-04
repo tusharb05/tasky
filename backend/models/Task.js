@@ -8,6 +8,8 @@ const memberSchema = new mongoose.Schema({
 })
 
 const taskSchema = new mongoose.Schema({
+  title: String,
+  description: String,
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
@@ -18,8 +20,12 @@ const taskSchema = new mongoose.Schema({
   },
   members: [memberSchema],
   creationDate: {
-    type: Date,
+    type: String,
     required: true
+  },
+  completed: {
+    type: Boolean,
+    default: false
   }
 })
 

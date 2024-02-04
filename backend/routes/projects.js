@@ -56,7 +56,7 @@ router.post("/addmember", async (req,res) => {
     } 
     // console.log(member._id.toString(), projectID);
     // new mongoose.Mongoose.Types.ObjectId(projectID)
-    const project = await Project.findById(projectID);
+    // const project = await Project.findById(projectID);
     
     const memberSaved = await Project.findByIdAndUpdate(projectID, {$push: {members:member._id}});
     // Mongoose.Types.ObjectId
