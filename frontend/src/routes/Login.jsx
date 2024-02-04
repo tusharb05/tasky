@@ -14,6 +14,7 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.msg == undefined) {
+          console.log("logged in");
           return localStorage.setItem("auth-token", data.token);
         }
         alert(data.msg);

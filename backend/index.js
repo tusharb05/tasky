@@ -1,7 +1,7 @@
 const express = require("express");
 const connectToMongo = require("./db");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -15,5 +15,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/projects", require("./routes/projects"));
 
 app.listen(PORT, ()=>console.log(`SERVER RUNNING ON PORT ${PORT}`));
