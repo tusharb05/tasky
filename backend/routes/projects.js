@@ -51,16 +51,22 @@ router.post("/addmember", async (req,res) => {
 
   try {
     const member = await User.findOne({email:memberEmail});
+    
     if(member===null) {
       return res.json({msg: "No user with this email exists"})
     } 
-    // console.log(member._id.toString(), projectID);
-    // new mongoose.Mongoose.Types.ObjectId(projectID)
-    // const project = await Project.findById(projectID);
     
-    const memberSaved = await Project.findByIdAndUpdate(projectID, {$push: {members:member._id}});
+    // console.log("MEMBER ID: ", new mongoose.Types.ObjectId(member.id))
+    // const memberSaved = await Project.findByIdAndUpdate(projectID, {$push: {members: new mongoose.Types.ObjectId(member.id)}});
+    const id = new mongoose.Types.ObjectId(member.id);
+    console.log(id)
+
+    const project = await Project.findById(projectID);
+    project.members = [{id}, ...project.members];
+    project.save();
+
     // Mongoose.Types.ObjectId
-    res.json({memberSaved});
+    res.json({msg: id});
   }catch (e) {
     res.json({msg: "Some error occured on our side"});
     console.log(e)
@@ -69,27 +75,50 @@ router.post("/addmember", async (req,res) => {
 
 // remove a team member from a project
 router.post("/removemember", async (req,res)=>{
-  const {projectID, memberEmail} = req.body;
+  // console.log("asdf")
+  const {projectId, memberId} = req.body;
+  
+  const project = await Project.findById(projectId);
+  let newMembers = project.members.filter(member => member.id.toString()!==memberId)
+  // res.json({newMembers})
+  const newProject = await Project.findByIdAndUpdate(projectId, {members: newMembers});
+  res.json({members: newMembers, msg:"member removed"})
 })
 
+
+async function getMembers(members) {
+  let list = []
+  for (let i=0; i<members.length; i++) {
+    // console.log(members[i].id)
+    let user = await User.findById(members[i].id);
+    list.push(user);
+  }
+  return list;
+}
+
 // get all team members working for the project
-router.get("/getmembers", async (req,res)=>{
-  const {projectID} = req.body;
+router.get("/getmembers/:projectId", async (req,res)=>{
+  const projectID = req.params.projectId
   try {
     const project = await Project.findById(projectID)
     const members = project.members;
-    // console.log(members)
-    let data = [];
-    for (let i=0;i <members.length; i++) {
-      // console.log(members[i]._id)
-      const user = await User.findById(members[i]._id.toString());
-      // console.log(user)
-    }
+    let list = await getMembers(members)
+    return res.json({members: list})
   }catch (e) {
     res.json({msg: "Some error occured on our side"});
     console.log(e)
   }
 })
 
+// get a project
+router.get("/getproject/:projectId", async (req,res)=>{
+  // console.log(req.params.projectId)
+  try {
+    const project = await Project.findById(req.params.projectId);
+    res.json({project})
+  } catch (e) {
+    res.json({msg: "project not found"})
+  }
+})
 
 module.exports = router;

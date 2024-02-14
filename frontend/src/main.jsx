@@ -10,7 +10,7 @@ import Navbar from "./components/Navbar.jsx";
 import { AuthContextProvider } from "./AuthContextProvider";
 import { ProjectContextProvider } from "./ProjectContextProvider.jsx";
 import Signup from "./routes/Signup.jsx";
-import SingleProject from "./components/SingleProject.jsx";
+import SingleProject from "./routes/SingleProject.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +29,14 @@ const router = createBrowserRouter([
   {
     path: "/project/:projectID",
     element: <SingleProject />,
+    loader: async ({ params }) => {
+      let res = await fetch(
+        `http://localhost:5000/api/projects/getproject/${params.projectID}`
+      );
+      let data = await res.json();
+
+      return data.project;
+    },
   },
 ]);
 
