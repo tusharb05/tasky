@@ -4,6 +4,20 @@ const z = require("zod");
 const Project = require("../models/Project");
 const Task = require("../models/Task");
 const User = require("../models/User");
+const mongoose = require("mongoose")
+
+// get all tasks of a project
+router.get("/gettasks", async (req,res)=>{
+  const projectId = req.header("projectId");
+  try {
+    const tasks = await Task.find({projectId});
+    res.json({tasks})  
+  } catch (e) {
+    res.json({msg: "Something went wrong!"})
+    console.log(e.message)
+  }
+  
+})
 
 // create a task
 router.post("/createtask", async (req,res)=>{
@@ -20,7 +34,7 @@ router.post("/createtask", async (req,res)=>{
     console.log(e)
   }
 })
-
+ 
 // update a task
 
 // delete a task
@@ -61,6 +75,20 @@ router.put("/addmembers", async (req,res)=>{
 // remove members from tasks
 router.delete("/removemember", async (req, res)=>{
   
+})
+
+// mark a task as completed
+router.post("/completetask", async (req,res)=>{
+  const {taskId} = req.body;
+  console.log(taskId);
+  try {
+    const task = await Task.findById(taskId);
+    task.completed = !task.completed;
+    task.save();
+  } catch (e) {
+    res.json({msg: "Something went wrong!"});
+    console.log(e.message);
+  }
 })
 
 module.exports = router;

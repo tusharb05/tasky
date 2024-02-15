@@ -1,6 +1,11 @@
 import React from "react";
 
-const SingleMember = ({ member, projectId, setMembers }) => {
+const SingleMember = ({
+  member,
+  projectId,
+  setMembers,
+  setMemberListChanged,
+}) => {
   const deleteMember = () => {
     console.log(projectId);
     fetch(`http://localhost:5000/api/projects/removemember`, {
@@ -16,6 +21,7 @@ const SingleMember = ({ member, projectId, setMembers }) => {
         console.log(data);
         setMembers(data.members);
         alert(data.msg);
+        setMemberListChanged((prev) => !prev);
       });
   };
 

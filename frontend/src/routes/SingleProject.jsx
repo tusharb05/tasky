@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, useParams, useLoaderData } from "react-router-dom";
 import { ProjectContext } from "../ProjectContextProvider";
 import MemberList from "../components/MemberList";
+import TaskSection from "../components/TaskSection";
 
 const SingleProject = () => {
   // const { projectID } = useParams();
@@ -9,7 +10,7 @@ const SingleProject = () => {
   // console.log(project);
   return (
     <>
-      <div className="h-screen">
+      <div className="h-[94vh]">
         <div id="headings" className="h-1/6">
           <div className="flex justify-center mt-7 mb-5">
             <h1 className="text-4xl">{project.title}</h1>
@@ -21,13 +22,15 @@ const SingleProject = () => {
           <hr className="mx-[40%]" />
         </div>
 
-        <div className="grid lg:grid-cols-5 h-5/6 bg-sky-500">
-          <div className="col-span-2 bg-slate-400 h-full">task list</div>
+        <div className="grid lg:grid-cols-4 h-5/6 bg-sky-500">
+          <div className="col-span-1 bg-slate-400 h-full">
+            <TaskSection projectId={project._id} />
+          </div>
           <div className="col-span-2 bg-slate-500 h-full">
             project wide chat
           </div>
 
-          <div className="col-span-1 bg-[#ecebeb] p-2 justify-center">
+          <div className="col-span-1 bg-[#ecebeb] p-2 relative flex justify-center flex-col align-center">
             <MemberList projectId={project._id} />
           </div>
         </div>
