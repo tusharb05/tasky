@@ -23,7 +23,7 @@ const SingleProject = () => {
         </div>
 
         <div className="grid lg:grid-cols-4 h-5/6 bg-sky-500">
-          <div className="col-span-1 bg-slate-400 h-full">
+          <div className="col-span-1 h-full">
             <TaskSection projectId={project._id} />
           </div>
           <div className="col-span-2 bg-slate-500 h-full">

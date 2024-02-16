@@ -23,8 +23,8 @@ const SingleTask = ({ task }) => {
 
   return (
     <div
-      className={`flex align-middle justify-between px-5 mt-3 bg-[#befff0] w-[90%] mx-auto rounded-md py-2 ${
-        completed && "bg-[#a8fb7e]"
+      className={`flex align-middle justify-between px-5 mb-2 w-[90%] mx-auto rounded-md py-2 ${
+        completed ? "bg-[#81ff83]" : "bg-[#d0fff4]"
       }`}
     >
       <div className="">
