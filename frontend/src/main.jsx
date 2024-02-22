@@ -35,18 +35,26 @@ const router = createBrowserRouter([
       );
       let data = await res.json();
 
-      return data.project;
+      let res2 = await fetch("http://localhost:5000/api/auth/getuser", {
+        method: "GET",
+        headers: {
+          "auth-token": localStorage.getItem("auth-token"),
+        },
+      });
+      let user = await res2.json();
+
+      return { project: data.project, user };
     },
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <AuthContextProvider>
       <ProjectContextProvider>
         <Navbar />
         <RouterProvider router={router} />
       </ProjectContextProvider>
     </AuthContextProvider>
-  </React.StrictMode>
+  </>
 );

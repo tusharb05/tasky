@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const arraySchema = new mongoose.Schema({
-  id: String
+  projectId: mongoose.Schema.Types.ObjectId
   // id: mongoose.ObjectId
 })
 
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tasks: [arraySchema]
+  projects: [arraySchema]
 })
 
 const user = mongoose.model("users", userSchema);

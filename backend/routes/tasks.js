@@ -23,7 +23,7 @@ router.get("/gettasks", async (req,res)=>{
 router.post("/createtask", async (req,res)=>{
   const {title, description, projectId, creatorId} = req.body;
   const currentDate = new Date();
-
+  // console.log(req.body)
   try {
     const task = await Task.create({title, description, projectId, creatorId, members:[], 
       creationDate:`${currentDate.getDate().toString()}-${currentDate.getMonth().toString()}-${currentDate.getFullYear()}`});

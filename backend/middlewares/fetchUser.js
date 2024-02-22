@@ -6,8 +6,8 @@ require("dotenv").config();
 
 const fetchUser = (req,res,next) => {
 
-  const token = req.headers.token
-  // console.log(token)c
+  const token = req.header("auth-token")
+  // console.log(token)
   const decoded = jwt.verify(token, process.env.JWT_KEY, (err,decoded)=>{
       if (err) return false
       return decoded

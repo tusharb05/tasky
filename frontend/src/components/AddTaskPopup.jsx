@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../AuthContextProvider";
 
-const AddTaskPopup = ({ setShowForm, projectId }) => {
+const AddTaskPopup = ({ setShowForm, projectId, creatorId }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const user = useContext(AuthContext);
-  const creatorId = user.userData._id;
+  // const creatorId = user.userData._id;
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submitted");
     fetch("http://localhost:5000/api/tasks/createtask", {
       method: "POST",
       headers: {

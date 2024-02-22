@@ -2,6 +2,7 @@ const express = require("express");
 const z = require("zod");
 const Project = require("../models/Project");
 const User = require("../models/User");
+const Chat = require("../models/Chat");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const mongoose = require("mongoose");
@@ -14,6 +15,7 @@ router.post("/create", async (req,res) => {
   const {title, description, owner} = req.body;
   try {
     const project = await Project.create({title,description,owner});
+    const chat = await Chat.create({projectId:project._id, chats: []});
     res.json({...project});
   } catch(e) {
     res.json({msg: "Some error occured on our side"});
@@ -120,5 +122,7 @@ router.get("/getproject/:projectId", async (req,res)=>{
     res.json({msg: "project not found"})
   }
 })
+
+
 
 module.exports = router;

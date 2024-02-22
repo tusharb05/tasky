@@ -3,10 +3,13 @@ import { Routes, Route, useParams, useLoaderData } from "react-router-dom";
 import { ProjectContext } from "../ProjectContextProvider";
 import MemberList from "../components/MemberList";
 import TaskSection from "../components/TaskSection";
+import ChatSection from "../components/ChatSection";
+
+import { AuthContext } from "../AuthContextProvider";
 
 const SingleProject = () => {
   // const { projectID } = useParams();
-  const project = useLoaderData();
+  const { project, user } = useLoaderData();
   // console.log(project);
   return (
     <>
@@ -24,10 +27,11 @@ const SingleProject = () => {
 
         <div className="grid lg:grid-cols-4 h-5/6 bg-sky-500">
           <div className="col-span-1 h-full">
-            <TaskSection projectId={project._id} />
+            <TaskSection user={user} projectId={project._id} />
           </div>
-          <div className="col-span-2 bg-slate-500 h-full">
-            project wide chat
+
+          <div className="col-span-2 bg-[#cecece] h-full">
+            <ChatSection user={user} project={project} />
           </div>
 
           <div className="col-span-1 bg-[#ecebeb] p-2 relative flex justify-center flex-col align-center">

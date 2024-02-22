@@ -11,14 +11,12 @@ const OwnerProjects = () => {
     fetch("http://localhost:5000/api/projects/getownerprojects", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        token: localStorage.getItem("auth-token"),
+        "auth-token": localStorage.getItem("auth-token"),
       },
     })
       .then((res) => res.json())
       .then((data) => {
         setProjects(data.projects);
-        console.log(data.projects);
       });
   }, []);
 

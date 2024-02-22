@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SingleTask from "./SingleTask";
 import AddTaskPopup from "./AddTaskPopup";
 
-const TaskSection = ({ projectId }) => {
+const TaskSection = ({ user, projectId }) => {
   const [tasks, setTasks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [taskUpdated, setTaskUpdated] = useState(false);
@@ -46,6 +46,7 @@ const TaskSection = ({ projectId }) => {
           setShowForm={setShowForm}
           projectId={projectId}
           setTaskUpdated={setTaskUpdated}
+          creatorId={user._id}
         />
       )}
     </>
