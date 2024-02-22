@@ -21,41 +21,25 @@ module.exports = function(server) {
 
       socket.join(projectId);
       roomId = projectId;
-      
+      console.log(projectId)
       const chats = await Chat.findOne({projectId});
       socket.emit("get_chats", chats);
-      // console.log(rooms)
+      
     })
 
     socket.on("send_message", async ({projectId, text, senderName, senderId}) => {
+      const c = await Chat.findOne({projectId});
+      if (c==null) {
+        await Chat.create({projectId, chats:[]});
+      }
       const chat = await Chat.updateOne({projectId}, {$push: {chats: {text,senderName, senderId}}})
       const chats = await Chat.findOne({projectId});
+      console.log(chat)
       io.to(projectId).emit('get_chats', chats)
       socket.emit("get_chats", chats);
     })
-    // socket.on("")
 
-    // io.to(Object.keys(io.of("/").adapter.rooms[socket.id])[1]).emit("greet", {msg:"hello"}) // doesn't work
-    // -----------------------------------------------------------
-
-    // socket.to("65d427f81cc2e2df9f68a0ba").emit("get_all_messages", async () => {
-    //   const projectId = "65d427f81cc2e2df9f68a0ba"
-    //   const chats = await Chat.findOne({projectId});
-    //   console.log(socket)
-    //   console.log(socket.rooms)
-    //   return chats;
-    // })
-    
-    
-    // socket.on("send_message", async ({text, senderName, senderId, projectId}) => {
-    //   const chat = await Chat.findOneAndUpdate({projectId:projectId},{$push: {chats:{text, senderName, senderId}}});
-    //   console.log(chat);
-    // })
 
   })
 
 }
-
-// return all the previous messages from the database
-// listen for new messages - store it in the database and return the updated array of messages and emit the new array
-// 

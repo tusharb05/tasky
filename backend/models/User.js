@@ -22,7 +22,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  projects: [arraySchema]
+  projects: {
+    type: [arraySchema],
+    default: []
+  }
 })
 
 const user = mongoose.model("users", userSchema);
