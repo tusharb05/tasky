@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { AuthContext } from "./AuthContextProvider";
-import OwnerProjects from "./components/OwnerProjects";
+import AllProjects from "./components/AllProjects";
 
 function App() {
   const { loggedIn, setLoggedIn, userData, setUserData } =
@@ -24,10 +24,9 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-slate-900">{loggedIn && "logged in"}</h1>
-      <OwnerProjects />
-    </>
+    <div className="h-screen w-full bg-slate-700">
+      <AllProjects />
+    </div>
   );
 }
 

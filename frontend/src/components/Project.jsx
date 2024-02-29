@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 
 const Project = ({ project }) => {
+  const [ownerName, setOwnerName] = useState("");
   const navigate = useNavigate();
   // redirect(`/project/${project._id.toString()}`)
   // console.log(project);
+  // console.log(project);
   const handleClick = () => {
-    navigate(`/project/${project._id.toString()}`);
+    navigate(`/project/${project.project._doc._id.toString()}`);
   };
 
+  const getOwnerName = async (userId) => {
+    let res = await fetch("http://localhost:5000/api/auth/getuserbyid", {
+      method: "GET",
+      headers: {
+        userId: userId,
+      },
+    });
+    let data = await res.json();
+    setOwnerName(data.user.fname + " " + data.user.lname);
+  };
+
+  useEffect(() => {
+    if (project.isOwner) {
+      setOwnerName("you");
+    } else {
+      getOwnerName(project.project._doc.owner);
+    }
+  });
   return (
     <>
       <div
-        className="bg-[#e8eff4] m-2 shadow-[#e9e8e8b5] shadow-sm hover:shadow-md py-1 px-2 hover:bg-[#72bed7] hover:text-white rounded-md hover:cursor-pointer"
+        // className="bg-[#e8eff4] m-2 shadow-[#e9e8e8b5] shadow-sm hover:shadow-md py-1 px-2 hover:bg-[#72bed7] hover:text-white rounded-md hover:cursor-pointer"
+        className="bg-[#CCDAD1] h-fit p-2 rounded-md mx-4 my-6 hover:cursor-pointer hover:shadow-lg hover:shadow-[#2e454c]"
         onClick={handleClick}
       >
-        <h3 className="text-xl">{project.title}</h3>
-        <p>{project.description}</p>
+        <h3 className="text-xl">{project.project._doc.title}</h3>
+        <p>{project.project._doc.description}</p>
+        <p>owner: {ownerName}</p>
       </div>
     </>
   );

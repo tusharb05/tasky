@@ -48,10 +48,11 @@ const ChatSection = ({ user, project }) => {
 
   return (
     <div className="h-full w-full">
-      <h1 className="bg-[#989898] h-[10%] text-white text-2xl flex justify-center my-auto py-2.5">
+      <h1 className=" h-[10%] text-white text-2xl flex justify-center m-0 p-0 my-auto py-2.5">
         Chat with the members
       </h1>
-      <div id="container" className="relative h-full w-full">
+
+      <div id="container" className="relative h-[90%]">
         <div id="chats" className="h-[80%]  overflow-scroll">
           {/* {console.log(messages.length)} */}
           {messages?.map((msg) => (
@@ -64,8 +65,8 @@ const ChatSection = ({ user, project }) => {
           ))}
         </div>
 
-        <div id="chat-form" className="absolute bottom-20 w-full">
-          {/* <h1>form</h1> */}
+        {/* <div id="chat-form" className="absolute bottom-20 w-full">
+    
           <form
             onSubmit={(e) => handleSubmit(e)}
             className="p-0 m-0 flex justify-between px-10"
@@ -84,7 +85,7 @@ const ChatSection = ({ user, project }) => {
               Send
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
     </div>
   );

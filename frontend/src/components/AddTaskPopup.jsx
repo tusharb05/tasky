@@ -24,7 +24,7 @@ const AddTaskPopup = ({ setShowForm, projectId, creatorId }) => {
   };
 
   return (
-    <div className="h-full bg-[#ecebeb] p-2 px-4">
+    <div className="h-full p-2 px-4">
       <h1 className="text-2xl mb-5">Add task</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label className="text-xl">Title</label>
@@ -34,7 +34,7 @@ const AddTaskPopup = ({ setShowForm, projectId, creatorId }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter title of the task"
-          className="mt-2 w-full p-1.5 rounded-md border-solid border-[#f6a4a4] border-2 focus:border-[#f6a4a4] mb-5"
+          className="mt-2 w-full p-1.5 rounded-md border-solid border-[#f6a4a4] border-2 focus:border-[#f6a4a4] mb-5 text-black"
         />
         <br />
         <label className="text-xl">Description</label>
@@ -44,12 +44,12 @@ const AddTaskPopup = ({ setShowForm, projectId, creatorId }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description of the task"
-          className="mt-2 w-full p-1.5 rounded-md border-solid border-[#f6a4a4] border-2 focus:border-[#f6a4a4] mb-4"
+          className="mt-2 w-full p-1.5 rounded-md border-solid border-[#f6a4a4] border-2 focus:border-[#f6a4a4] mb-4 text-black"
         />
         <br />
         <button
           type="submit"
-          className="w-full bg-[#f6a4a4] rounded-md mt-4 p-1.5 text-white text-xl"
+          className="w-full bg-[#f06b6b] rounded-md mt-4 p-1.5 text-white text-xl"
         >
           Add task
         </button>

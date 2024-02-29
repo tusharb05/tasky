@@ -23,12 +23,14 @@ const loginSchema = z.object({
 
 router.post("/createuser", async (req,res)=>{
   // console.log(process.env.JWT_KEY)
-  const user = userSchema.safeParse(req.body);
+  const user = userSchema.safeParse(req.body.user);
   if (!user.success) {
+    console.log(user.error)
     return res.status(400).json({msg: "wrong input"});
   }
   try {
     const findUser = await User.findOne({email:user.data.email});
+    // const findUser = await User.findOne({email:req.body.user.email})
     // console.log(findUser);
     if (findUser!=null) { 
       return res.json({msg: "an account same email exists"})
@@ -89,6 +91,19 @@ router.get("/getuser", fetchUser, async(req,res)=>{
     res.json(user)
   } catch (e) {
     res.status(500).json({msg:'error occured while fetching user data'})
+  }
+})
+
+router.get("/getuserbyid", async (req,res)=>{
+  let userId = req.header("userId");
+  console.log(userId)
+  try {
+    let user = await User.findById(userId);
+    console.log(user) 
+    res.json({user})
+  } catch (e) {
+    res.json({msg:"something went wrong"});
+    console.log(e.message)
   }
 })
 

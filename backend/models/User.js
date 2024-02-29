@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const arraySchema = new mongoose.Schema({
-  projectId: mongoose.Schema.Types.ObjectId
+  projectId: mongoose.Schema.Types.ObjectId,
+  owner: Boolean
   // id: mongoose.ObjectId
 })
 

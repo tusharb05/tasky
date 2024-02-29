@@ -5,17 +5,48 @@ const SingleMessage = ({ chat, user, project }) => {
   console.log(project);
   return (
     <div
-      id="chat"
-      className={`${
-        user._id.toString() == chat.senderId.toString()
-          ? "bg-[#aafbbd]"
-          : "bg-[#99e2ff]"
-      } ${
-        project.owner.toString() == chat.senderId.toString() && "bg-[#ffa389]"
-      } text-white mx-3 my-4 rounded-md px-5 py-2 `}
+      className={`relative w-full flex  flex-row ${
+        project.owner.toString() == chat.senderId.toString() &&
+        "flex-row-reverse"
+      }`}
     >
-      <p className="text-[#5a5a5a]">{chat.senderName}</p>
-      <h1 className="text-[#272727]">{chat.text}</h1>
+      <div
+        id="chat"
+        className={`
+        h-fit
+        w-fit
+        max-w-[70%]
+      bg-[#ffffff0f]  text-white mx-3 my-1 rounded-md px-2 py-[0.2rem] 
+        
+      `}
+      >
+        <div
+          className={`flex ${
+            project.owner.toString() == chat.senderId.toString() &&
+            "flex-row-reverse"
+          }`}
+        >
+          <p
+            className={`text-[#46ffa9]
+        ${
+          project.owner.toString() == chat.senderId.toString()
+            ? "text-[#46ffa9]"
+            : "text-[#b8b7b7]"
+        }
+        ${
+          project.owner.toString() == chat.senderId.toString() &&
+          user._id.toString() != chat.senderId.toString() &&
+          "text-[#ffa389]"
+        } 
+        
+      `}
+          >
+            {chat.senderName}
+          </p>
+        </div>
+        {/* owner-orange, normal-grey sender-green */}
+        <h1 className="text-white">{chat.text}</h1>
+      </div>
     </div>
   );
 };

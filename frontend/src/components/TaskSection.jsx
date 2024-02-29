@@ -22,18 +22,21 @@ const TaskSection = ({ user, projectId }) => {
   return (
     <>
       {!showForm && (
-        <div className="h-full w-full bg-[#ecebeb] p-2">
-          <div className="flex justify-between mx-4 h-[10%]">
+        <div className="h-full w-full p-2">
+          <div className="flex justify-between mx-4 mb-5">
             <h1 className="text-2xl">Tasks</h1>
             <button
-              className="bg-[#f06b6b] text-white p-1.5 rounded-md hover:bg-[#f07777] h-[65%]"
+              className="bg-[#f06b6b] text-white p-1.5 rounded-md hover:bg-[#f07777] h-[65%] "
               onClick={() => setShowForm(true)}
             >
               Add task
             </button>
           </div>
 
-          <div className=" h-[80%] overflow-scroll" id="tasks">
+          <div
+            className="lg:h-[500px] md:h-[350px] overflow-y-scroll"
+            id="tasks"
+          >
             {tasks.map((task) => {
               return <SingleTask key={task._id} task={task} />;
             })}

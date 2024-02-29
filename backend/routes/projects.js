@@ -15,10 +15,12 @@ router.post("/create", async (req,res) => {
   const {title, description, owner} = req.body;
   try {
     const project = await Project.create({title,description,owner});
+    const updateList = await User.findOneAndUpdate({_id:owner}, {$push:{projects: {projectId: project._id, owner: true}}})
     const chat = await Chat.create({projectId:project._id, chats: []});
     res.json({...project});
   } catch(e) {
     res.json({msg: "Some error occured on our side"});
+    console.log(e.message)
   }
 })
 
@@ -33,12 +35,29 @@ router.delete("/delete", async (req,res) => {
   }
 })
 
+async function getAllProjects (arr)  {
+  let list = [];
+  for (let i=0; i<arr.length; i++) {
+    let singleProject = await Project.findById(arr[i].projectId);
+    // console.log(singleProject)
+    singleProject = {...singleProject, isOwner: arr[i].owner};
+    // list.push(singleProject)
+    list.push({project: singleProject, isOwner:arr[i].owner});
+  }
+  // console.log(list)
+  return list;
+}
+
 // get all projects where user is owner
 router.get("/getownerprojects", fetchUser, async (req,res) => {
-  // const {ownerID} = req.body;
   try {
     // console.log('hello: ', req.body)
-    const projects = await Project.find({owner:req.body.id});
+    const user = await User.findById(req.body.id)
+    // res.json({userId:req.body.id})
+    // res.json({projects: user.projects})
+
+    let projects = await getAllProjects(user.projects);
+    // console.log(projects)
     res.json({projects});
   } catch (e) {
     res.json({msg: "Some error occured on our side"});
@@ -57,6 +76,9 @@ router.post("/addmember", async (req,res) => {
     if(member===null) {
       return res.json({msg: "No user with this email exists"})
     } 
+
+    member.projects = [{projectId:new mongoose.Types.ObjectId(projectID), owner:false},...member.projects];
+    member.save();
     
     // console.log("MEMBER ID: ", new mongoose.Types.ObjectId(member.id))
     // const memberSaved = await Project.findByIdAndUpdate(projectID, {$push: {members: new mongoose.Types.ObjectId(member.id)}});

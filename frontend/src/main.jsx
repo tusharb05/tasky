@@ -52,7 +52,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <AuthContextProvider>
       <ProjectContextProvider>
-        <Navbar />
         <RouterProvider router={router} />
       </ProjectContextProvider>
     </AuthContextProvider>
