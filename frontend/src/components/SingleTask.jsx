@@ -24,7 +24,7 @@ const SingleTask = ({ task }) => {
   return (
     <div
       className={`flex align-middle justify-between px-5 mb-2 w-[90%] mx-auto rounded-md py-2 ${
-        completed ? "bg-[#4dbc4d]" : "bg-[#416a7a] backdrop-blur-sm"
+        completed ? "bg-[#4dbc4d]" : "bg-[#416a7aa0] backdrop-blur-sm"
       }`}
     >
       {/* bg-[#FFFFFF1C] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0,

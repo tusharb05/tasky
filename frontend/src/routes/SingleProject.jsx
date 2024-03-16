@@ -27,16 +27,17 @@ const SingleProject = () => {
         </div>
 
         <div className="grid lg:grid-cols-4 mb-0 text-white mt-5 h-[80%]">
-          <div className="col-span-1 h-full bg-[#FFFFFF1C] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)]">
+          <div className="col-span-1 h-full bg-[#aaaaaa1b] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)]">
             {/* <h1>hello</h1> */}
             <TaskSection user={user} projectId={project._id} />
           </div>
-          <div className="col-span-2  h-full bg-[#FFFFFF1C] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)]">
+          <div className="col-span-2  h-full bg-[#aaaaaa1b] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)]">
             <ChatSection user={user} project={project} />
           </div>
-          {/* <div className="col-span-1 bg-[#ecebeb] p-2 relative flex justify-center flex-col align-center">
+
+          <div className="col-span-1 h-full bg-[#aaaaaa1b] rounded-[16px] m-2 p-2 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)] p-3 pl-4">
             <MemberList projectId={project._id} />
-          </div> */}
+          </div>
         </div>
       </div>
     </>

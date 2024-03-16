@@ -20,10 +20,18 @@ const MemberList = ({ projectId }) => {
     <>
       {/* <div className="h-full w-full relative"> */}
       {!showForm && (
-        <h2 className="text-slate-700 pl-2 absolute top-4">Members</h2>
+        <div className="flex justify-between mx-4 mb-5">
+          <h1 className="text-2xl">Members</h1>
+          <button
+            className="bg-[#f06b6b] text-white p-1.5 rounded-md hover:bg-[#f07777] h-[65%] "
+            onClick={() => setShowForm(true)}
+          >
+            Add Member
+          </button>
+        </div>
       )}
 
-      <div className="absolute top-11  w-[95%] h-[77%] overflow-scroll ">
+      <div className="overflow-y-auto">
         {!showForm &&
           members.map((member) => (
             <SingleMember
@@ -36,14 +44,6 @@ const MemberList = ({ projectId }) => {
           ))}
       </div>
 
-      {!showForm && (
-        <button
-          className="bg-[#fc9b46] p-1.5 rounded-md w-3/5 text-white absolute bottom-10 right-auto left-1/2 -translate-x-1/2"
-          onClick={() => setShowForm((prev) => !prev)}
-        >
-          Add member
-        </button>
-      )}
       {/* <div className=""> */}
       {showForm && (
         <AddMemberPopup setShowForm={setShowForm} projectId={projectId} />

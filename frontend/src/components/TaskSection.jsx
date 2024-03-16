@@ -33,10 +33,7 @@ const TaskSection = ({ user, projectId }) => {
             </button>
           </div>
 
-          <div
-            className="lg:h-[500px] md:h-[350px] overflow-y-scroll"
-            id="tasks"
-          >
+          <div className="lg:h-[500px] md:h-[350px] overflow-y-auto" id="tasks">
             {tasks.map((task) => {
               return <SingleTask key={task._id} task={task} />;
             })}

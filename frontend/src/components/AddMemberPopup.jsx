@@ -20,22 +20,32 @@ const AddMemberPopup = ({ setShowForm, projectId }) => {
 
   return (
     <>
-      <div className="h-full w-100%">
+      <div className="h-full p-2 px-4">
+        <h1 className="text-2xl mb-5">Add member</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
+          <label className="text-xl">Enter email of the member</label>
+          <br />
           <input
             type="text"
-            placeholder="Enter email of the member"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email of the member"
+            className="mt-2 w-full p-1.5 rounded-md border-solid border-[#f6a4a4] border-2 focus:border-[#f6a4a4] mb-5 text-black"
           />
-          <button type="submit" className="bg-orange-400 p-2">
-            Add
-          </button>
-          {/* <button onClick={() => console.log("clicked")}>Add</button> */}
-        </form>
+          <br />
 
-        <button className="m-20" onClick={() => console.log("hello, world")}>
-          cancel
+          <button
+            type="submit"
+            className="w-full bg-[#f06b6b] rounded-md mt-4 p-1.5 text-white text-xl"
+          >
+            Add Member
+          </button>
+        </form>
+        <button
+          onClick={() => setShowForm((prev) => !prev)}
+          className="w-full bg-[#a1a1a1] rounded-md mt-4 p-1.5 text-white text-xl "
+        >
+          Cancel
         </button>
       </div>
     </>

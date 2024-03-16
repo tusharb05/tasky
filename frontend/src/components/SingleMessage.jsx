@@ -2,12 +2,14 @@ import React from "react";
 
 const SingleMessage = ({ chat, user, project }) => {
   // console.log(chat);
-  console.log(project);
+  console.log(user);
   return (
     <div
       className={`relative w-full flex  flex-row ${
+        user._id.toString() == chat.senderId.toString() && "flex-row-reverse"
+      } ${
         project.owner.toString() == chat.senderId.toString() &&
-        "flex-row-reverse"
+        console.log("owner: ", chat.text)
       }`}
     >
       <div
@@ -29,7 +31,7 @@ const SingleMessage = ({ chat, user, project }) => {
           <p
             className={`text-[#46ffa9]
         ${
-          project.owner.toString() == chat.senderId.toString()
+          user._id.toString() == chat.senderId.toString()
             ? "text-[#46ffa9]"
             : "text-[#b8b7b7]"
         }

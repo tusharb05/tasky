@@ -100,7 +100,7 @@ router.get("/getuserbyid", async (req,res)=>{
   try {
     let user = await User.findById(userId);
     console.log(user) 
-    res.json({user})
+    res.json({user })
   } catch (e) {
     res.json({msg:"something went wrong"});
     console.log(e.message)

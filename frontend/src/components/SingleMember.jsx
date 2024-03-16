@@ -1,4 +1,5 @@
 import React from "react";
+import { RiDeleteBin7Fill } from "react-icons/ri";
 
 const SingleMember = ({
   member,
@@ -27,17 +28,17 @@ const SingleMember = ({
 
   return (
     <>
-      <div className="bg-[#e7dfdf] text-black rounded-sm m-2 pl-3 px-2 grid grid-cols-6 py-2">
-        <div className="col-span-4">
+      <div className="bg-[#416a7aa0] text-white rounded-lg m-2 pl-3 px-4 flex justify-between py-2">
+        <div className="">
           <h1>{`${member.fname} ${member.lname}`}</h1>
           <h2>{member.email}</h2>
         </div>
-        <div className="col-span-2 my-auto  text-white px-auto">
+        <div className="my-auto px-auto">
           <button
-            className="bg-[#ff6d63] p-0.5 px-2 rounded-md"
+            // className="bg-[#ff6d63] p-1 rounded-md"
             onClick={deleteMember}
           >
-            remove
+            <RiDeleteBin7Fill className="text-[#d36860]" />
           </button>
         </div>
       </div>

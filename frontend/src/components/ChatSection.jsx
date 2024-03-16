@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { io } from "socket.io-client";
 import SingleMessage from "./SingleMessage";
+import { BsFillSendFill } from "react-icons/bs";
 
 const ChatSection = ({ user, project }) => {
   const [socketId, setSocketId] = useState("");
@@ -42,6 +43,7 @@ const ChatSection = ({ user, project }) => {
     let projectId = project._id.toString();
     // console.log(text, senderName, senderId, projectId);
     socket.emit("send_message", { text, senderName, senderId, projectId });
+    setText("");
   };
 
   // console.log(localStorage.getItem("auth-token"));
@@ -53,7 +55,7 @@ const ChatSection = ({ user, project }) => {
       </h1>
 
       <div id="container" className="relative h-[90%]">
-        <div id="chats" className="h-[80%]  overflow-scroll">
+        <div id="chats" className="h-[500px]  overflow-y-auto">
           {/* {console.log(messages.length)} */}
           {messages?.map((msg) => (
             <SingleMessage
@@ -65,27 +67,23 @@ const ChatSection = ({ user, project }) => {
           ))}
         </div>
 
-        {/* <div id="chat-form" className="absolute bottom-20 w-full">
-    
-          <form
-            onSubmit={(e) => handleSubmit(e)}
-            className="p-0 m-0 flex justify-between px-10"
-          >
+        <div id="chat-form" className="">
+          <form onSubmit={(e) => handleSubmit(e)} className="w-full px-10">
             <input
               type="text"
               placeholder="Enter your message"
-              className="w-5/6 py-1 px-2 rounded-md bg-[#ff749d] text-white placeholder-white text-xl font-medium"
+              className="h-10 w-[65%] p-1 mr-5 bg-inherit text-md border-[#83d5f9] border-solid border-b-2 focus:outline-none"
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
             <button
               type="submit"
-              className="bg-[#4b78ff] px-4 rounded-md text-white hover:bg-[#5983ff] text-xl"
+              // className="bg-inherit border-[#83d5f9] border-solid border-2 h-1/2 my-auto p-1 px-10 rounded-lg hover:border-[#4dc9ff]"
             >
-              Send
+              <BsFillSendFill className="text-[#83d5f9]" />
             </button>
           </form>
-        </div> */}
+        </div>
       </div>
     </div>
   );
