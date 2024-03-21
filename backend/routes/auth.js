@@ -23,7 +23,7 @@ const loginSchema = z.object({
 
 router.post("/createuser", async (req,res)=>{
   // console.log(process.env.JWT_KEY)
-  const user = userSchema.safeParse(req.body.user);
+  const user = userSchema.safeParse(req.body);
   if (!user.success) {
     console.log(user.error)
     return res.status(400).json({msg: "wrong input"});

@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Login from "./routes/Login.jsx";
-import Navbar from "./components/Navbar.jsx";
 import { AuthContextProvider } from "./AuthContextProvider";
 import { ProjectContextProvider } from "./ProjectContextProvider.jsx";
 import Signup from "./routes/Signup.jsx";

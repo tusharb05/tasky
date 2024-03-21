@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const nav = useNavigate();
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +19,8 @@ const Signup = () => {
       .then((data) => {
         // console.log(data);
         if (data.msg == undefined) {
-          return localStorage.setItem("auth-token", data.token);
+          localStorage.setItem("auth-token", data.token);
+          return nav("/");
         }
         alert(data.msg);
       });

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,8 +17,9 @@ const Login = () => {
       .then((data) => {
         if (data.msg == undefined) {
           console.log("logged in");
-          redirect("/");
-          return localStorage.setItem("auth-token", data.token);
+          localStorage.setItem("auth-token", data.token);
+          nav("/");
+          return;
         }
         alert(data.msg);
       });

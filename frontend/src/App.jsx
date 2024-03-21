@@ -10,7 +10,7 @@ function App() {
     fetch("http://localhost:5000/api/auth/getuser", {
       method: "GET",
       headers: {
-        token: localStorage.getItem("auth-token"),
+        "auth-token": localStorage.getItem("auth-token"),
       },
     })
       .then((res) => res.json())
@@ -18,13 +18,13 @@ function App() {
         if (data.msg !== "invalid token") {
           setLoggedIn(true);
           setUserData(data);
-          // console.log(data);
         }
+        // console.log(data);
       });
-  }, []);
+  }, [loggedIn]);
 
   return (
-    <div className="h-screen w-full bg-slate-700">
+    <div className="">
       <AllProjects />
     </div>
   );
